@@ -1,0 +1,8 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/oec116-ed2-01?serverTimezone=Europe/Rome
+        username: root
+        password: password
+    jpa:
+        hibernate:
+            ddl-auto: update
