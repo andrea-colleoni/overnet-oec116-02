@@ -9,10 +9,13 @@ public class GreetController {
 
 	
 	@Value("${person.name}")
-	public String name;
+	private String name;
+	
+	@Value("${person.nodo}")
+	private String nodo;
 	
 	@GetMapping("/greet")
 	public String greet() {
-		return "Hello " + name;
+		return "Hello " + name + " sul nodo " + nodo;
 	}
 }

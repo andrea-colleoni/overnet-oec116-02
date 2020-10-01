@@ -8,4 +8,5 @@ spring:
       server:
         git:
           uri:  file:///${user.home}/cloud-config
+          searchPaths: '{application}/{profile}'
   
