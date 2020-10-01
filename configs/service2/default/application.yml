@@ -4,9 +4,14 @@ spring:
 server:
     port: 0
 eureka:
+  instance:
+    instanceId: ${spring.application.name}:${random.int}
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+feign:
+  hystrix:
+    enabled: true
 management:
   endpoint:
     metrics:

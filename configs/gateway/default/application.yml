@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+      - id: google
+        uri: https://google.com
+        predicates:
+        - Path=/google/**
+        filters:
+        - RewritePath=/google(?<segment>/?.*), $\{segment}
+      - id: servizio1
+        uri: lb://SERVICE1
+        predicates:
+        - Path=/api/servizio1/**
+        filters:
+        - RewritePath=/api/servizio1(?<segment>/?.*), $\{segment}
+      - id: servizio2
+        uri: lb://SERVICE2
+        predicates:
+        - Path=/api/servizio2/**
+        filters:
+        - RewritePath=/api/servizio2(?<segment>/?.*), $\{segment}
+server:
+    port: 8080
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka    
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    beans:
+      enabled: true 
+    mappings:
+      enabled: true       
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, beans, mappings
+  

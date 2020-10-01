@@ -11,8 +11,8 @@ import it.insiel.service2.clients.Service1Client;
 @RestController
 public class SampleController {
 	
-	@Autowired
-	private EurekaClient eurekaClient;
+//	@Autowired
+//	private EurekaClient eurekaClient;
 	
 	@Autowired
 	private Service1Client s1;
@@ -25,11 +25,11 @@ public class SampleController {
 	
 	@GetMapping("/serv1")
 	public String serv1() {
-		var app = eurekaClient.getApplication("SERVICE1");
-		var istanze = app.getInstances();
-		for(var i : istanze) {
-			System.out.println(i.getIPAddr() + " - " + i.getPort());
-		}
+//		var app = eurekaClient.getApplication("SERVICE1");
+//		var istanze = app.getInstances();
+//		for(var i : istanze) {
+//			System.out.println(i.getIPAddr() + " - " + i.getPort());
+//		}
 		return s1.greet();
 	}
 	
