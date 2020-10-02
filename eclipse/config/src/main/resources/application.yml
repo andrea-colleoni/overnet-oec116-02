@@ -7,6 +7,6 @@ spring:
     config:
       server:
         git:
-          uri:  file:///${user.home}/Desktop/Temp/Corsi/OEC116/configs/
+          uri:  file:///var/config-server
           searchPaths: '{application}/{profile}'
   
