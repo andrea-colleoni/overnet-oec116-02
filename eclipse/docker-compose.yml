@@ -1,0 +1,50 @@
+version: '3'
+services:
+  config:
+    build: ./config
+    ports:
+    - 8888:8888
+    volumes:
+    - C:/Users/andre/Desktop/Temp/Corsi/OEC116/configs:/var/config-server
+    networks:
+    - microservizi_net
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+  registry:
+    build: ./registry
+    depends_on:
+      - config
+    ports:
+    - 8761:8761
+    networks:
+    - microservizi_net
+  service1:
+    build: ./service1
+    depends_on:
+      - config
+      - registry
+      - database
+    networks:
+    - microservizi_net
+  gateway:
+    build: ./gateway
+    depends_on:
+      - config
+    ports:
+    - 80:8080
+    networks:
+    - microservizi_net    
+  database:
+    image: mysql
+    restart: always
+    volumes:
+    - C:/Users/andre/Desktop/Temp/Corsi/OEC116/data:/var/lib/mysql
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=password'
+      - 'MYSQL_DATABASE=oec116-ed2-01'
+networks:
+  microservizi_net:
+    driver: bridge
